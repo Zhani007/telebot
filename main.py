@@ -1,8 +1,8 @@
 import telebot
-from bot_logic import gen_pass, flip_coin, gen_emoji  # Импортируем функции из bot_logic
+from bot_logic import gen_pass, flip_coin, gen_emoji, random_answer  # Импортируем функции из bot_logic
 # Замени 'TOKEN' на токен твоего бота
 # Этот токен ты получаешь от BotFather, чтобы бот мог работать
-bot = telebot.TeleBot("TOCKEN")
+bot = telebot.TeleBot("7641936499:AAFl_Z3lyBcXHWAMUvTO4PFJRJPC1LkxsmI")
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -30,6 +30,11 @@ def send_emoji(message):
 def send_coin(message):
     coin = flip_coin()
     bot.reply_to(message, f"Монетка выпала так: {coin}")
+
+@bot.message_handler(commands=['predict'])
+def send_predict(message):
+    answer = random_answer()
+    bot.reply_to(message, f"Мой ответ: {answer}")
 
 # Запускаем бота
 bot.polling()
